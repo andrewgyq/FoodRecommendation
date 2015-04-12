@@ -58,7 +58,11 @@ public class Application {
 
         Random r = new Random();
         String id = lines.get(r.nextInt(lines.size()));
-        AmazonProduct product = amazonPageParser.amazonPageParser(id);
+        AmazonProduct product = null;
+        while(product == null){
+            product = amazonPageParser.amazonPageParser(id);
+            id = lines.get(r.nextInt(lines.size()));
+        }
         mv.addObject("title",product.getTitle());
         mv.addObject("desc", product.getDesc());
         mv.addObject("url", product.getUrl());
